@@ -1,0 +1,33 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<div class="flex justify-between mb-4">
+  <h1 class="text-2xl font-bold">Product List</h1>
+  <a href="{% url 'product_create' %}" class="bg-green-600 text-white px-4 py-2 rounded">+ Add Product</a>
+</div>
+
+<table class="w-full border bg-white">
+  <thead class="bg-gray-200">
+    <tr>
+      <th class="p-2 border">Name</th>
+      <th class="p-2 border">SKU</th>
+      <th class="p-2 border">Supplier</th>
+      <th class="p-2 border">Stock</th>
+      <th class="p-2 border">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr class="border-t">
+      <td class="p-2">{{ product.name }}</td>
+      <td class="p-2">{{ product.sku }}</td>
+      <td class="p-2">{{ product.supplier }}</td>
+      <td class="p-2">{{ product.quantity_in_stock }}</td>
+      <td class="p-2">
+        <a href="{% url 'product_update' product.pk %}" class="text-blue-600">Edit</a> |
+        <a href="{% url 'product_delete' product.pk %}" class="text-red-600">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
